@@ -7,7 +7,7 @@ clean:
 	zip -9 --filesync --move --recurse-paths .fonts.zip .fonts/
 
 %.zip:
-	npm install --no-fund --no-package-lock --no-shrinkwrap
+	npm install --no-fund
 	mkdir -p nodejs/
 	npm install --prefix nodejs/ lambdafs@~2.0.3 puppeteer-core@~9.1.0 --no-bin-links --no-fund --no-optional --no-package-lock --no-save --no-shrinkwrap
 	npm pack
