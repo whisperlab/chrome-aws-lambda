@@ -59,4 +59,4 @@ jobs:
       run: unzip chrome_aws_lambda.zip -d _/amazon/code
 
     - name: Invoke Lambda on SAM
-      run: sam local invoke --log-file /dev/stdout --template _/amazon/template.yml --event _/amazon/events/${{ matrix.event }}.json node${{ matrix.version }} 2>&1 | tee /dev/stdout | (grep 'Error' && exit 1 || exit 0)
+      run: sam local invoke --template _/amazon/template.yml --event _/amazon/events/${{ matrix.event }}.json node${{ matrix.version }} 2>&1 | tr "\r" "\n" | tee /dev/stdout | (grep 'Error' && exit 1 || exit 0)
