@@ -1,6 +1,10 @@
 const { ok } = require('assert');
 const { createHash } = require('crypto');
 const chromium = require('chrome-aws-lambda');
+const util = require('util')
+const zlib = require('zlib')
+
+const gzip = util.promisify(zlib.gzip)
 
 exports.handler = async (event, context) => {
   let browser = null;
@@ -35,7 +39,11 @@ exports.handler = async (event, context) => {
           }
 
           if (job.expected.hasOwnProperty('screenshot') === true) {
-            ok(createHash('sha1').update((await page.screenshot()).toString('base64')).digest('hex') === job.expected.screenshot, `Screenshot assertion failed.`);
+            const imgBase64 = (await page.screenshot()).toString('base64')
+            const hash = createHash('sha1').update(imgBase64).digest('hex')
+            console.log('hash', hash)
+            console.log('img', (await gzip(imgBase64)).toString('base64'))
+            ok(hash === job.expected.screenshot, `Screenshot assertion failed.`);
           }
         }
       }
