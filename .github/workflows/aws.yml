@@ -59,4 +59,4 @@ jobs:
       run: unzip chrome_aws_lambda.zip -d _/amazon/code
 
     - name: Invoke Lambda on SAM
-      run: sam local invoke --template _/amazon/template.yml --event _/amazon/events/${{ matrix.event }}.json node${{ matrix.version }} 2>&1 > /tmp/run.result; echo /tmp/run.result; cat /tmp/run.result; cat /tmp/run.result | tail -1 | (grep 'errorType' && exit 1 || exit 0)
+      run: sam local invoke --template _/amazon/template.yml --event _/amazon/events/${{ matrix.event }}-node${{ matrix.version }}.json node${{ matrix.version }} 2>&1 > /tmp/run.result; echo /tmp/run.result; cat /tmp/run.result; cat /tmp/run.result | tail -1 | (grep 'errorType' && exit 1 || exit 0)

@@ -1,0 +1,16 @@
+[
+  {
+    "url": "https://example.com",
+    "expected": {
+      "title": "Example Domain",
+      "screenshot": "16ec52a91c4ec21fe7bb76d8882d42bdf2f84be7"
+    }
+  },
+  {
+    "url": "https://example.com",
+    "expected": {
+      "title": "Example Domain",
+      "screenshot": "16ec52a91c4ec21fe7bb76d8882d42bdf2f84be7"
+    }
+  }
+]
